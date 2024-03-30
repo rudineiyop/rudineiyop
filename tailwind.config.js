@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['index.html'],
+  content: ['./**/*.html'],
   theme: {
     container: {
       center: true,
@@ -14,9 +14,15 @@ module.exports = {
       },
       screens: {
         '2xl': '1320px',
+      },
+      fontFamily: {
+        bodybold: ['Montserrat']
       }
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui : {
+    themes : ["light", "night", "emerald"]
+  },
 }
 
