@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular Expressions - Ruth Grace Arlyana Manurung</title>    
+    <link rel="shortcut icon" href="https://www.svgrepo.com/show/435664/file-regexp.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../css/output.css">
+</head>
+    <body class="bg-slate-300 text-gray-300 px-8 xl:px-[9.2rem] py-14">
+        <div class="bg-gray-50 min-h-screen flex items-center justify-center px-16 rounded py-12">
+            <div class="relative w-full max-w-lg">
+              <div class="absolute top-36 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob max-[640px]:w-1/4 max-[640px]:h-1/4"></div>
+              <div class="absolute top-36 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 max-[640px]:w-1/4 max-[640px]:h-1/4"></div>
+              <div class="absolute -bottom-1 left-24 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 max-[640px]:w-1/4 max-[640px]:h-1/4"></div>
+              
+              <div class="m-8 relative space-y-8">
+
+                <div class="flex-col mb-16">
+                    <p class="text-neutral-900 font-bold text-3xl text-center mb-3 mt-10">Regular Expressions</p>
+                    <p class="text-neutral-900 text-md">Learning regular expression for Human Computer Interaction.
+                        <span class="text-neutral-700">Made with <a href="https://tailwindcss.com" target="_blank" class="font-bold text-sky-500">Tailwind CSS.</a></span>
+                    </p>
+                </div>
+
+                <div class="w-full lg:w-full lg:mx-auto">
+                    <div class="w-full px-4 mb-8">
+                        <label for="slug" class="text-lg text-purple-700 font-bold">Slug</label>
+                        <input type="text" id="inputSLUG" class="w-full bg-purple-100
+                        text-gray-900 p-3 rounded-md focus:outline-none focus:ring-purple-700
+                        focus:ring-1 focus:border-purple-700" placeholder="Input sebuah slug disini..." />
+                        <p id="validasiSLUG" class="mt-2"></p>
+                    </div>
+                    
+                    <div class="w-full px-4 mb-8">
+                        <label for="ttl" class="text-lg text-purple-700 font-bold">Tanggal Lahir</label>
+                        <input type="text" id="inputTTL" class="w-full bg-purple-100
+                        text-gray-900 p-3 rounded-md focus:outline-none focus:ring-purple-700
+                        focus:ring-1 focus:border-purple-700" placeholder="Input tanggal lahir anda..." />
+                        <p id="validasiTTL" class="mt-2"></p>
+                    </div>
+
+                    <div class="w-full px-4 mb-8">
+                        <label for="hex" class="text-lg text-purple-700 font-bold">Warna(HEX)</label>
+                        <input type="text" id="inputHEX" class="w-full bg-purple-100
+                        text-gray-900 p-3 rounded-md focus:outline-none focus:ring-purple-700
+                        focus:ring-1 focus:border-purple-700" placeholder="Input warna dengan format HEX" />
+                        <p id="validasiHEX" class="mt-2"></p>
+                    </div>
+
+                    <div class="w-full px-4 mb-8">
+                        <label for="jam" class="text-lg text-purple-700 font-bold">Jam</label>
+                        <input type="text" id="inputJAM" class="w-full bg-purple-100
+                        text-gray-900 p-3 rounded-md focus:outline-none focus:ring-purple-700
+                        focus:ring-1 focus:border-purple-700" placeholder="Input jam disini..." />
+                        <p id="validasiJAM" class="mt-2"></p>
+                    </div>
+
+                    <div class="w-full px-4 mb-8">
+                        <label for="awalan" class="text-lg text-purple-700 font-bold">Awalan</label>
+                        <input type="text" id="inputAWALAN" class="w-full bg-purple-100
+                        text-gray-900 p-3 rounded-md focus:outline-none focus:ring-purple-700
+                        focus:ring-1 focus:border-purple-700" placeholder="Input kata yang memiliki awalan" />
+                        <p id="validasiAWALAN" class="mt-2"></p>
+                    </div>
+                    
+                    
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+    
+          <script>
+            let regexInputSLUG = document.getElementById("inputSLUG");
+            let slugValidasi = document.getElementById("validasiSLUG");
+
+            let regexInputTTL = document.getElementById("inputTTL");
+            let ttlValidasi = document.getElementById("validasiTTL");
+
+            let regexInputHEX = document.getElementById("inputHEX");
+            let hexValidasi = document.getElementById("validasiHEX");
+
+            let regexInputJAM = document.getElementById("inputJAM");
+            let jamValidasi = document.getElementById("validasiJAM");
+
+            let regexInputAWALAN = document.getElementById("inputAWALAN");
+            let awalanValidasi = document.getElementById("validasiAWALAN");
+
+
+            const REGEX_SLUG = new RegExp("^[a-z0-9-]+$");
+            const REGEX_TTL = new RegExp("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$");
+            const REGEX_HEX = new RegExp("^#?([a-f0-9]{6}|[a-f0-9]{3})$");
+            const REGEX_JAM = new RegExp("^(0?[1-9]|1[0-2]):[0-5][0-9]\\s?(am|pm|AM|PM)?$");
+            const REGEX_AWALAN = new RegExp("^(ber|per|meng|peng|di|ke|ter|se)");
+            
+            
+            regexInputSLUG.addEventListener("input", () => {
+                handleInput(regexInputSLUG, slugValidasi, REGEX_SLUG, "Invalid, gunakan format xxx-xxx tanpa spasi dan karakter non-alfanumerik.");
+            });
+
+            regexInputTTL.addEventListener("input", () => {
+                handleInput(regexInputTTL, ttlValidasi, REGEX_TTL, "Invalid, gunakan format DD-MM-YYYY.");
+            });
+
+            regexInputHEX.addEventListener("input", () => { 
+                handleInput(regexInputHEX, hexValidasi, REGEX_HEX, "Invalid, gunakan format #RRGGBB, RRGGBB, #RGB atau RGB.");
+            });
+            regexInputJAM.addEventListener("input", () => {
+                handleInput(regexInputJAM, jamValidasi, REGEX_JAM, "Invalid, gunakan format HH-MM atau HH-MM am/pm.");
+            });
+            regexInputAWALAN.addEventListener("input", () => {
+                handleInput(regexInputAWALAN, awalanValidasi, REGEX_AWALAN, "Invalid, gunakan awalan ber-, per-, meng-, peng-, di-, ke-, ter- atau se-.");
+            });
+    
+    
+            function handleInput(inputElement, validationElement, regex, validationMessage) {
+            if(inputElement.value === ""){
+                validationElement.classList.remove("text-green-500");
+                validationElement.classList.remove("text-red-500");
+                inputElement.classList.add("focus:ring-indigo-600");
+                inputElement.classList.remove("focus:ring-red-500");
+                inputElement.classList.remove("focus:ring-green-500");
+                inputElement.classList.add("ring-grey-300");
+                inputElement.classList.remove("ring-red-500");
+                inputElement.classList.remove("ring-green-500");
+                validationElement.innerHTML = "";
+            }else if(regex.test(inputElement.value)){
+                validationElement.classList.add("text-green-500");
+                validationElement.classList.remove("text-red-500");
+                inputElement.classList.remove("focus:ring-indigo-600");
+                inputElement.classList.remove("focus:ring-red-500");
+                inputElement.classList.add("focus:ring-green-500");
+                inputElement.classList.remove("ring-grey-300");
+                inputElement.classList.remove("ring-red-500");
+                inputElement.classList.add("ring-green-500");
+                validationElement.innerHTML = "Valid";
+            }else{
+                validationElement.classList.add("text-red-500");
+                validationElement.classList.remove("text-green-500");
+                inputElement.classList.remove("focus:ring-indigo-600");
+                inputElement.classList.remove("focus:ring-green-500");
+                inputElement.classList.add("focus:ring-red-500");
+                inputElement.classList.remove("ring-grey-300");
+                inputElement.classList.remove("ring-green-500");
+                inputElement.classList.add("ring-red-500");
+                validationElement.innerHTML = validationMessage;
+            }
+        }
+        </script>
+    </body>
+</html>
