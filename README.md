@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-🌱 I’m currently learning TailwindCSS
+🌱 I’m currently learning Astro
 
 📫 How to reach me: https://www.linkedin.com/in/ruthgracea/
 
